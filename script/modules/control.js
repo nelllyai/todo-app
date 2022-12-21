@@ -1,6 +1,7 @@
-import { createTaskRow } from "./createElements.js";
-import { addStorage, editStorage, getStorage, removeStorage } from "./todoStorage.js";
-import { renderToDoList, renderTasks } from "./render.js";
+import {createTaskRow} from './createElements.js';
+import {addStorage, editStorage,
+  getStorage, removeStorage} from './todoStorage.js';
+import {renderTasks} from './render.js';
 
 const addTaskToList = (task, list, num) => {
   list.append(createTaskRow(task, num));
@@ -32,20 +33,6 @@ const rebuildNumbers = list => {
   });
 };
 
-export const modalControl = (modal, list, taskForm) => {
-  modal.addEventListener('submit', event => {
-    event.preventDefault();
-
-    const {username} = Object.fromEntries(new FormData(event.target));
-
-    modal.remove();
-
-    renderTasks(username, list);
-    taskFormControl(taskForm, list, username);
-    listControl(list, username);
-  });
-};
-
 export const taskFormControl = (form, list, user) => {
   form.addEventListener('input', event => {
     const target = event.target;
@@ -66,7 +53,7 @@ export const taskFormControl = (form, list, user) => {
       id: Math.random().toString().substring(2, 10),
       task: formData.get('task'),
       importance: formData.get('importance'),
-      status: 'processed'
+      status: 'processed',
     };
 
     const len = getStorage(user).length;
@@ -99,9 +86,25 @@ export const listControl = (list, username) => {
     } else if (target.closest('.btn-success')) {
       editTaskStatus(currentId, username);
       editTaskStatusOnPage(currentTr);
-    } else if (target.closest('.btn-primary') && !currentTask.classList.contains('text-decoration-line-through')) {
+    } else if (target.closest('.btn-primary') &&
+      !currentTask.classList.contains('text-decoration-line-through')) {
       currentTask.contentEditable = true;
-      currentTask.addEventListener('blur', () => currentTask.contentEditable = false);
+      currentTask.addEventListener('blur',
+          () => currentTask.contentEditable = false);
     }
+  });
+};
+
+export const modalControl = (modal, list, taskForm) => {
+  modal.addEventListener('submit', event => {
+    event.preventDefault();
+
+    const {username} = Object.fromEntries(new FormData(event.target));
+
+    modal.remove();
+
+    renderTasks(username, list);
+    taskFormControl(taskForm, list, username);
+    listControl(list, username);
   });
 };

@@ -1,11 +1,11 @@
 export const createModal = () => {
   const overlay = document.createElement('div');
   overlay.classList.add('position-absolute', 'top-0', 'start-0',
-    'w-100', 'h-100', 'bg-white', 'bg-opacity-50');
+      'w-100', 'h-100', 'bg-white', 'bg-opacity-50');
 
   const modal = document.createElement('div');
   modal.classList.add('position-absolute', 'top-50', 'start-50',
-    'translate-middle', 'shadow', 'p-3', 'bg-white', 'rounded');
+      'translate-middle', 'shadow', 'p-3', 'bg-white', 'rounded');
 
   const form = document.createElement('form');
   form.classList.add('form', 'd-flex', 'flex-column', 'align-items-center');
@@ -36,7 +36,8 @@ export const createTaskForm = () => {
 
   form.insertAdjacentHTML('afterbegin', `
     <label class="form-group me-3 mb-0">
-      <input type="text" class="form-control" name="task" placeholder="ввести задачу">
+      <input type="text" class="form-control"
+        name="task" placeholder="ввести задачу">
     </label>
 
     <select class="form-select w-25 me-3" name="importance">
@@ -87,7 +88,7 @@ export const createTable = () => {
   return tableWrapper;
 };
 
-export const createTaskRow = ({ id, task, importance, status }, n) => {
+export const createTaskRow = ({id, task, importance, status}, n) => {
   const tr = document.createElement('tr');
 
   const tdNum = document.createElement('td');

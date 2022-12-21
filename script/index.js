@@ -1,5 +1,6 @@
-import { renderContainer, renderModal, renderTasks, renderToDoList } from "./modules/render.js";
-import { modalControl } from "./modules/control.js";
+import {renderContainer, renderModal,
+  renderToDoList} from './modules/render.js';
+import {modalControl} from './modules/control.js';
 
 const init = () => {
   const app = document.querySelector('.app-container');
