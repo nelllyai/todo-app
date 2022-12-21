@@ -1,5 +1,6 @@
 import { createTaskRow } from "./createElements.js";
 import { addStorage, editStorage, getStorage, removeStorage } from "./todoStorage.js";
+import { renderToDoList, renderTasks } from "./render.js";
 
 const addTaskToList = (task, list, num) => {
   list.append(createTaskRow(task, num));
@@ -28,6 +29,20 @@ const rebuildNumbers = list => {
   let counter = 0;
   rows.forEach(row => {
     row.querySelectorAll('td')[0].textContent = ++counter;
+  });
+};
+
+export const modalControl = (modal, list, taskForm) => {
+  modal.addEventListener('submit', event => {
+    event.preventDefault();
+
+    const {username} = Object.fromEntries(new FormData(event.target));
+
+    modal.remove();
+
+    renderTasks(username, list);
+    taskFormControl(taskForm, list, username);
+    listControl(list, username);
   });
 };
 

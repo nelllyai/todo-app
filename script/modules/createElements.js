@@ -1,6 +1,32 @@
+export const createModal = () => {
+  const overlay = document.createElement('div');
+  overlay.classList.add('position-absolute', 'top-0', 'start-0',
+    'w-100', 'h-100', 'bg-white', 'bg-opacity-50');
+
+  const modal = document.createElement('div');
+  modal.classList.add('position-absolute', 'top-50', 'start-50',
+    'translate-middle', 'shadow', 'p-3', 'bg-white', 'rounded');
+
+  const form = document.createElement('form');
+  form.classList.add('form', 'd-flex', 'flex-column', 'align-items-center');
+  form.insertAdjacentHTML('beforeend', `
+    <h2 class="form-title mb-3">Добро пожаловать!</h2>
+    <div class="form-group mb-2">
+      <label class="form-label" for="username">Введите имя:</label>
+      <input type="text" class="form-input" name="username"required>
+    </div>
+    <button type="submit" class="btn-primary">Войти</button>
+  `);
+
+  modal.append(form);
+  overlay.append(modal);
+
+  return overlay;
+};
+
 export const createHeader = () => {
   const header = document.createElement('h3');
-  header.textContent = 'Todo App';
+  header.textContent = 'Список дел';
   return header;
 };
 
