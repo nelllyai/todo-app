@@ -7,11 +7,17 @@ export const createHeader = () => {
 export const createTaskForm = () => {
   const form = document.createElement('form');
   form.classList.add('d-flex', 'align-items-center', 'mb-3');
-  
+
   form.insertAdjacentHTML('afterbegin', `
     <label class="form-group me-3 mb-0">
       <input type="text" class="form-control" name="task" placeholder="ввести задачу">
     </label>
+
+    <select class="form-select w-25 me-3" name="importance">
+      <option value="regular">обычная</option>
+      <option value="important">важная</option>
+      <option value="urgent">срочная</option>
+    </select>
 
     <button type="submit" class="btn btn-primary me-3" disabled>
       Сохранить
@@ -33,7 +39,7 @@ export const createTable = () => {
 
   const table = document.createElement('table');
   table.classList.add('table', 'table-hover', 'table-bordered');
-  
+
   const thead = document.createElement('thead');
   thead.innerHTML = `
     <tr>
@@ -55,7 +61,7 @@ export const createTable = () => {
   return tableWrapper;
 };
 
-export const createTaskRow = ({ id, task, status }, n) => {
+export const createTaskRow = ({ id, task, importance, status }, n) => {
   const tr = document.createElement('tr');
 
   const tdNum = document.createElement('td');
@@ -69,7 +75,13 @@ export const createTaskRow = ({ id, task, status }, n) => {
   const tdStatus = document.createElement('td');
 
   if (status === 'processed') {
-    tr.classList.add('table-light');
+    if (importance === 'regular') {
+      tr.classList.add('table-light');
+    } else if (importance === 'important') {
+      tr.classList.add('table-warning');
+    } else {
+      tr.classList.add('table-danger');
+    }
     tdStatus.textContent = 'В процессе';
   } else {
     tr.classList.add('table-success');
@@ -78,7 +90,7 @@ export const createTaskRow = ({ id, task, status }, n) => {
   }
 
   const tdButtonGroup = document.createElement('td');
-  
+
   const buttonDelete = document.createElement('button');
   buttonDelete.classList.add('btn', 'btn-danger', 'me-1');
   buttonDelete.textContent = 'Удалить';

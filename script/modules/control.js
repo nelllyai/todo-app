@@ -14,7 +14,7 @@ const removeTaskFromStorage = (taskId, user) => {
 };
 
 const editTaskStatusOnPage = rowTask => {
-  rowTask.classList.replace('table-light', 'table-success');
+  rowTask.classList.replace(rowTask.className, 'table-success');
   rowTask.querySelector('.task').classList.add('text-decoration-line-through');
   rowTask.querySelectorAll('td')[2].textContent = 'Выполнена';
 };
@@ -50,6 +50,7 @@ export const taskFormControl = (form, list, user) => {
     const newTask = {
       id: Math.random().toString().substring(2, 10),
       task: formData.get('task'),
+      importance: formData.get('importance'),
       status: 'processed'
     };
 
