@@ -93,6 +93,7 @@ export const listControl = (list, username) => {
     } else if (target.closest('.btn-primary') &&
       !currentTask.classList.contains('text-decoration-line-through')) {
       currentTask.contentEditable = true;
+      currentTask.focus();
       currentTask.addEventListener('blur', () => {
         editTaskText(currentId, username, currentTask.textContent);
         currentTask.contentEditable = false;
