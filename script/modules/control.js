@@ -25,6 +25,10 @@ const editTaskStatus = (taskId, user) => {
   editStorage(user, taskId, 'status', 'finished');
 };
 
+const editTaskText = (taskId, user, text) => {
+  editStorage(user, taskId, 'task', text);
+};
+
 const rebuildNumbers = list => {
   const rows = list.querySelectorAll('tbody > tr');
   let counter = 0;
@@ -89,8 +93,10 @@ export const listControl = (list, username) => {
     } else if (target.closest('.btn-primary') &&
       !currentTask.classList.contains('text-decoration-line-through')) {
       currentTask.contentEditable = true;
-      currentTask.addEventListener('blur',
-          () => currentTask.contentEditable = false);
+      currentTask.addEventListener('blur', () => {
+        editTaskText(currentId, username, currentTask.textContent);
+        currentTask.contentEditable = false;
+      });
     }
   });
 };
